@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import store from './store.js';
 import item from './item.js';
 
@@ -28,28 +29,6 @@ const generateItemElement = function (item) {
 const generateShoppingItemsString = function (shoppingList) {
   const items = shoppingList.map((item) => generateItemElement(item));
   return items.join('');
-};
-
-const render = function () {
-  // Filter item list if store prop is true by item.checked === false
-  let items = [...store.items];
-  if (store.hideCheckedItems) {
-    items = items.filter(item => !item.checked);
-  }
-  // render the shopping list in the DOM
-  const shoppingListItemsString = generateShoppingItemsString(items);
-  // insert that HTML into the DOM
-  $('.js-shopping-list').html(shoppingListItemsString);
-};
-
-const handleNewItemSubmit = function () {
-  $('#js-shopping-list-form').submit(function (event) {
-    event.preventDefault();
-    const newItemName = $('.js-shopping-list-entry').val();
-    $('.js-shopping-list-entry').val('');
-    store.addItem(newItemName);
-    render();
-  });
 };
 
 const handleItemCheckClicked = function () {
@@ -95,18 +74,62 @@ const handleEditShoppingItemSubmit = function () {
     render();
   });
 };
+const handleSubmit = function () {
+  $('.js-create').on('click', function (event) {
+    event.preventDefault();
+    const newItemName = $('.js-bookmark-entry').val();
+    $('.js-book-entry').val('');
+    store.addItem(newItemName);
+    render();
+  });
+};
 
-const bindEventListeners = function () {
-  handleNewItemSubmit();
-  handleItemCheckClicked();
-  handleDeleteItemClicked();
-  handleEditShoppingItemSubmit();
-  handleToggleFilterClick();
+const handleCreate = function () {
+  $('.js-create').on('click', function (event) {
+    event.preventDefault();
+    const createForm = 
+      `<form>
+        <label>Title:</label>
+        <input class="titleInput" type="text"/>
+        <label>URL:</label>
+        <input class="urlInput" type="text" placeholder:"www.address.com"/>
+        <label>Description:</label>
+        <input class="descriptionInput" type="textarea"/>
+        <label>Rating</label>
+        <select />
+        <option ></option>
+        <option></option>
+        <option></option>
+        <option></option>
+        <option></option>
+        </select>
+      </form>`;
+    $(createForm).slideToggle;
+  });
 };
 
 
+const bindEventListeners = function () {
+  handleCreate();
+  // handleItemCheckClicked();
+  // handleDeleteItemClicked();
+  // handleEditShoppingItemSubmit();
+  // handleToggleFilterClick();
+};
+
+const render = function () {
+  // Filter item list if store prop is true by item.checked === false
+  let items = [...store.items];
+  if (store.hideCheckedItems) {
+    items = items.filter(item => !item.checked);
+  }
+  // render the shopping list in the DOM
+  const shoppingListItemsString = generateShoppingItemsString(items);
+  // insert that HTML into the DOM
+  $('.js-shopping-list').html(shoppingListItemsString);
+};
+
 // This object contains the only exposed methods from this module:
 export default {
-  render,
   bindEventListeners
 };
