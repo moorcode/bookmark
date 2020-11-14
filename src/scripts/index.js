@@ -27,6 +27,7 @@ const displayResults = function () {
 };
 
 const main = function () {
+  displayResults();
   handleNewClicked();
   handleSubmit();
 };

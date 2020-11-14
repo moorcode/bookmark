@@ -8,25 +8,15 @@
     <title>Bookmark App</title>
 </head>
 <body>
-    <section class="main">
-        <h1>Add a New Bookmark</h1>
-        <button type="submit">New</button>
-        <ul class="js-item-list">
+    <header class="main">
+        <h1>Bookmark List</h1>
+    </header>
+    <main >
+        <ul>
+            <li class="empty js-empty">No bookmarks created</li>
         </ul>
-    </section>
-    <section class="hidden">
-        <h2 class="js-title">Title</h2>
-        <a class="js-url">Url for bookmark goes here.</a>
-        <p class="js-description">Description of bookmark goes here.</p>
-        <div class="js-rating">
-            <button class="rating-button">Rating:</button>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-        </div>
-    </section>
+        <button class="create js-create">Create</button>
+    </main>
     
     <script src="scripts/index.js"></script>
 </body>
