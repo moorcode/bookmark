@@ -1,6 +1,5 @@
 /* eslint-disable no-undef */
-import store from './store.js';
-import item from './item.js';
+
 
 const generateItemElement = function (item) {
   let itemTitle = `<span class="shopping-item shopping-item__checked">${item.name}</span>`;
@@ -82,39 +81,6 @@ const handleSubmit = function () {
     store.addItem(newItemName);
     render();
   });
-};
-
-const handleCreate = function () {
-  $('.js-create').on('click', function (event) {
-    event.preventDefault();
-    const createForm = 
-      `<form>
-        <label>Title:</label>
-        <input class="titleInput" type="text"/>
-        <label>URL:</label>
-        <input class="urlInput" type="text" placeholder:"www.address.com"/>
-        <label>Description:</label>
-        <input class="descriptionInput" type="textarea"/>
-        <label>Rating</label>
-        <select />
-        <option ></option>
-        <option></option>
-        <option></option>
-        <option></option>
-        <option></option>
-        </select>
-      </form>`;
-    $(createForm).slideToggle;
-  });
-};
-
-
-const bindEventListeners = function () {
-  handleCreate();
-  // handleItemCheckClicked();
-  // handleDeleteItemClicked();
-  // handleEditShoppingItemSubmit();
-  // handleToggleFilterClick();
 };
 
 const render = function () {
