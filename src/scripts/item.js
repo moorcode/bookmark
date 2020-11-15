@@ -1,6 +1,9 @@
-function validateField(field) {
-  if (field === ''){
-    throw new TypeError('Field must not be blank');
+function validateForm(title, url) {
+  if (title === ''){
+    throw new TypeError('Title must not be blank');
+  }
+  if (url === ''){
+    throw new TypeError('URL must not be blank');
   }
 }
 
@@ -15,6 +18,6 @@ const create = (title, url, description, rating) => {
 };
 
 export default {
-  validateField,
+  validateForm,
   create
 };

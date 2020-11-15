@@ -3,11 +3,10 @@ import item from './item.js';
 const items = [];
 const hideCheckedItems = false;
 
-
-const addItem = function (field) {
+const addItem = function (title, url, description, rating) {
   try {
-    item.validateField(field);
-    this.items.push(item.create(name));
+    item.validateForm(title, url);
+    this.items.push(item.create(title, url, description, rating));
   }
   catch (error) {
     console.log(`Cannot add item: ${error.message}`);
@@ -44,11 +43,12 @@ const toggleCheckedFilter = function () {
   this.hideCheckedItems = !this.hideCheckedItems;
 };
 
+
 export default {
+  addItem,
   items,
   hideCheckedItems,
   findById,
-  addItem,
   findAndToggleChecked,
   findAndUpdateName,
   findAndDelete,
