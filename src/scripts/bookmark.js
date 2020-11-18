@@ -1,6 +1,4 @@
-/* eslint-disable no-undef */
 import store from './store';
-import item from './item.js';
 
 const generateItemElement = function (item) {
   let bookmark = `
