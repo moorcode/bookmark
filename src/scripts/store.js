@@ -6,11 +6,16 @@ const hideCheckedItems = false;
 const addItem = function (title, url, description, rating) {
   try {
     item.validateForm(title, url);
-    this.items.push(item.create(title, url, description, rating));
+    this.items.push(item.create(title, url, description='', rating));
   }
   catch (error) {
     console.log(`Cannot add item: ${error.message}`);
   }
+};
+
+const findAndDelete = function (id) {
+  const index = this.items.findIndex(item => item.id === id);
+  this.items.splice(index, 1);
 };
 
 const findById = function (id) {
@@ -32,11 +37,6 @@ const findAndUpdateName = function (id, newName) {
   catch (error) {
     console.log(`Cannot update name: ${error.message}`);
   }
-};
-
-const findAndDelete = function (id) {
-  const index = this.items.findIndex(item => item.id === id);
-  this.items.splice(index, 1);
 };
 
 const toggleCheckedFilter = function () {

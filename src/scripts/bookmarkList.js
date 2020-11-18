@@ -1,98 +1,90 @@
 /* eslint-disable no-undef */
 
-
-const generateItemElement = function (item) {
-  let itemTitle = `<span class="shopping-item shopping-item__checked">${item.name}</span>`;
-  if (!item.checked) {
-    itemTitle = `
-      <form class="js-edit-item">
-        <input class="shopping-item" type="text" value="${item.name}" />
-      </form>
-    `;
-  }
-
-  return `
-    <li class="js-item-element" data-item-id="${item.id}">
-      ${itemTitle}
-      <div class="shopping-item-controls">
-        <button class="shopping-item-toggle js-item-toggle">
-          <span class="button-label">check</span>
-        </button>
-        <button class="shopping-item-delete js-item-delete">
-          <span class="button-label">delete</span>
-        </button>
-      </div>
-    </li>`;
-};
-
-const generateShoppingItemsString = function (shoppingList) {
-  const items = shoppingList.map((item) => generateItemElement(item));
-  return items.join('');
-};
-
-const handleItemCheckClicked = function () {
-  $('.js-shopping-list').on('click', '.js-item-toggle', event => {
-    const id = getItemIdFromElement(event.currentTarget);
-    store.findAndToggleChecked(id);
-    render();
-  });
-};
-
-const getItemIdFromElement = function (item) {
-  return $(item)
-    .closest('.js-item-element')
-    .data('item-id');
-};
-
-/**
- * Responsible for deleting a list item.
- * @param {string} id 
- */
-
-const handleDeleteItemClicked = function () {
-  $('.js-shopping-list').on('click', '.js-item-delete', event => {
-    const id = getItemIdFromElement(event.currentTarget);
-    store.findAndDelete(id);
-    render();
-  });
-};
-
-const handleToggleFilterClick = function () {
-  $('.js-filter-checked').click(() => {
-    store.toggleCheckedFilter();
-    render();
-  });
-};
-
-const handleEditShoppingItemSubmit = function () {
-  $('.js-shopping-list').on('submit', '.js-edit-item', event => {
-    event.preventDefault();
-    const id = getItemIdFromElement(event.currentTarget);
-    const itemName = $(event.currentTarget).find('.shopping-item').val();
-    store.findAndUpdateName(id, itemName);
-    render();
-  });
-};
-const handleSubmit = function () {
-  $('.js-create').on('click', function (event) {
-    event.preventDefault();
-    const newItemName = $('.js-bookmark-entry').val();
-    $('.js-book-entry').val('');
-    store.addItem(newItemName);
-    render();
-  });
-};
-
 const render = function () {
-  // Filter item list if store prop is true by item.checked === false
-  let items = [...store.items];
-  if (store.hideCheckedItems) {
-    items = items.filter(item => !item.checked);
-  }
-  // render the shopping list in the DOM
-  const shoppingListItemsString = generateShoppingItemsString(items);
-  // insert that HTML into the DOM
-  $('.js-shopping-list').html(shoppingListItemsString);
+  const root = `
+    <header class="main">
+        <h1>Bookmark List</h1>
+    </header>
+    <main >
+        <section class="form js-form">
+            <button class="create-button js-create-button">Create New Bookmark</button>
+            <div class="create-form-div js-create-form-div"></div>
+            <ul class="bookmark-list js-bookmark-list">
+                <li class="empty js-empty">Create a bookmark to display here</li>
+            </ul>
+        </section>
+    </main>`;
+  $('#root').html(root);
+};
+
+const handleCreate = function () {
+  $('.js-form').on('click', '.js-create-button', function (event) {
+    event.preventDefault();
+    $('.js-create-button').toggleClass('cancel').html('Cancel');
+    const createForm = 
+      `<form class="create-form js-create-form">
+        <label>Title:</label>
+        <input class="titleInput" type="text"/>
+        <label>URL:</label>
+        <input class="urlInput" type="text" placeholder="www.address.com"/>
+        <label>Description:</label>
+        <textarea class="descriptionInput"></textarea>
+        <label class="star-rating js-star-rating"><i class="fas fa-star"></i></label>
+        <select class="ratingInput">
+          <option class="option" >1</option>
+          <option class="option">2</option>
+          <option class="option">3</option>
+          <option class="option">4</option>
+          <option class="option">5</option>
+        </select>
+        <button class="js-submit">Add Bookmark</button>
+      </form>`;
+    $('.js-create-form-div').html(createForm).slideDown();
+  });
+};
+
+const handleCancel = function () {
+  $('.js-form').on('click', '.cancel', function () {
+    $('.cancel').toggleClass('cancel');
+    $(this).html('Create New Bookmark');
+    $('.js-create-form-div').slideUp();
+  });
+};
+
+const handleSubmit = function () {
+  $('.js-form').on('click', '.js-submit', function (event) {
+    event.preventDefault();
+    const newTitle = $('.titleInput').val();
+    const newUrl = $('.urlInput').val();
+    const newDescription = $('.descriptionInput').val();
+    const newRating = $('.ratingInput').val();
+    store.addItem(newTitle, newUrl, newDescription, newRating);
+    render();
+  });
+};
+
+const displayRating = function () {
+  $('.js-form').on('change', '.ratingInput', function () {
+    const currentRating = $('.ratingInput').val();
+    let starRating = [];
+    for (let i = 0; i < currentRating; i++) {
+      starRating.push('<i class="fas fa-star"></i>');
+    }
+    $('.js-star-rating').html(starRating);
+  });
+
+};
+
+const bindEventListeners = function () {
+  render();
+  handleCreate();
+  handleCancel();
+  handleSubmit();
+  displayRating();
+  // handleItemCheckClicked();
+  // handleDeleteItemClicked();
+  // handleEditShoppingItemSubmit();
+  // handleToggleFilterClick();
 };
 
 // This object contains the only exposed methods from this module:
