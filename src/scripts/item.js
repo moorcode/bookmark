@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 function validateForm(title, url) {
   if (title === ''){
     throw new TypeError('Title must not be blank');
