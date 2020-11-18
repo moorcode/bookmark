@@ -154,6 +154,10 @@ input:hover, textarea:hover, select:hover {
         order: 3;
     }
 
+    .create-form {
+        width: 415px;
+    }
+
     .bookmark-list {
         margin: 0 0 0 20px;
         width: 67%;
