@@ -1,4 +1,5 @@
 import store from './store';
+import item from './item.js';
 
 const render = function () {
   let items = [...store.items];
@@ -28,9 +29,10 @@ const generateBookmarkItemsString = function (bookmarkList) {
 };
 
 const generateItemElement = function (item) {
+  console.log(item.description)
   const stars = handleRating();
   let bookmark = `
-      <li class="bookmark-element" data-item-id="${item.id}">
+      <li class="bookmark-element js-bookmark-element" data-item-id="${item.id}">
         <form class="js-edit">
           <label>Title:</label>
           <input class="titleInput js-title-input" type="text" value="${item.title}">
@@ -38,11 +40,9 @@ const generateItemElement = function (item) {
           <input class="urlInput js-url-input" type="text" placeholder="www.address.com" value="${item.url}">
           <label>Description:</label>
           <textarea class="descriptionInput js-description-input">${item.description}</textarea>
-          <label class="star-rating js-star-rating"><i class="fas fa-star">${stars}</i></label>
+          <label class="star-rating js-star-rating"><i class="fas fa-star" value="${stars}"></i></label>
+          <button class="delete js-delete">Delete</button>
         </form>  
-        <button class="delete js-delete">
-          <span class="button-label">delete</span>
-        </button>
       </li>`;
 
   return `
@@ -50,17 +50,17 @@ const generateItemElement = function (item) {
 };
 
 const handleCreate = function () {
-  $('.js-form').on('click', '.js-create-button', function (event) {
+  $('body').on('click', '.js-create-button', function (event) {
     event.preventDefault();
     $('.js-create-button').toggleClass('cancel').html('Cancel');
     const createForm =
       `<form class="create-form js-create-form">
         <label for="title">Title:</label>
-        <input class="titleInput" type="text" name="title" required>
+        <input class="titleInput js-title-input" type="text" name="title" required>
         <label for="url">URL:</label>
-        <input class="urlInput" type="text" placeholder="www.address.com" name="url" required>
+        <input class="urlInput js-url-input" type="text" placeholder="www.address.com" name="url" required>
         <label>Description:</label>
-        <textarea class="descriptionInput"></textarea>
+        <textarea class="descriptionInput js-description-input"></textarea>
         <label class="star-rating js-star-rating"><i class="fas fa-star"></i></label>
         <select class="ratingInput">
           <option class="option" >1</option>
@@ -69,14 +69,14 @@ const handleCreate = function () {
           <option class="option">4</option>
           <option class="option">5</option>
         </select>
-        <button class="js-submit">Add Bookmark</button>
-      </form>`;
+      </form>
+      <button class="submit js-submit">Add Bookmark</button>`;
     $('.js-create-form-div').html(createForm).slideDown();
   });
 };
 
 const handleCancel = function () {
-  $('.js-form').on('click', '.cancel', function () {
+  $('body').on('click', '.cancel', function () {
     $('.cancel').toggleClass('cancel');
     $(this).html('Create New Bookmark');
     $('.js-create-form-div').slideUp();
@@ -84,7 +84,7 @@ const handleCancel = function () {
 };
 
 const handleRating = function () {
-  $('.js-form').on('change', '.ratingInput', function () {
+  $('body').on('change', '.ratingInput', function () {
     const currentRating = $('.ratingInput').val();
     let starRating = [];
     for (let i = 0; i < currentRating; i++) {
@@ -95,13 +95,12 @@ const handleRating = function () {
 };
 
 const handleSubmit = function () {
-  $('.js-form').on('click', '.js-submit', function (event) {
+  $('body').on('click', '.js-submit', function (event) {
     event.preventDefault();
-    const newTitle = $('.titleInput').val();
-    const newUrl = $('.urlInput').val();
-    const newDescription = $('.descriptionInput').val();
-    const newRating = $('.ratingInput').val();
-    handleRating(newRating);
+    const newTitle = $('.js-title-input').val();
+    const newUrl = $('.js-url-input').val();
+    const newDescription = $('.js-description-input').val();
+    const newRating = $('.js-star-rating').val();
     store.addItem(newTitle, newUrl, newDescription, newRating);
     render();
   });
@@ -109,7 +108,7 @@ const handleSubmit = function () {
 
 const getItemIdFromElement = function (item) {
   return $(item)
-    .closest('.js-item-element')
+    .closest('.js-bookmark-element')
     .data('item-id');
 };
 
@@ -119,7 +118,8 @@ const getItemIdFromElement = function (item) {
  */
 
 const handleDelete = function () {
-  $('.js-bookmark-list').on('click', '.js-item-delete', event => {
+  $('body').on('click', '.js-delete', function (event) {
+    event.preventDefault();
     const id = getItemIdFromElement(event.currentTarget);
     store.findAndDelete(id);
     render();

@@ -49,6 +49,7 @@ form {
     border: dashed 1px rgba(255, 255, 255, 0.708);
     font-size: 20px;
     color: rgba(255, 255, 255, 0.831);
+    list-style: none;
 }
 
 .empty {
@@ -68,7 +69,7 @@ form {
 
 .create-form {
     margin: 0 0 0 0;
-    padding: 0;
+    padding: 15px 0 0 0;
     height: 100%;
     width: 450px;
     display: flex;
@@ -118,6 +119,28 @@ input:hover, textarea:hover, select:hover {
 }
 
 .js-submit:hover {
+    background-color: rgba(56, 140, 236, 0.448);
+    cursor: pointer;
+}
+
+.js-edit {
+    padding: 15px 0 0 0;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.js-delete {
+    margin: 10px 0 20px 0;
+    height: 35px;
+    width: 170px;
+    border: none;
+    background-color: rgba(25, 113, 215, 0.872);
+    color: white;
+}
+
+.js-delete:hover {
     background-color: rgba(56, 140, 236, 0.448);
     cursor: pointer;
 }
