@@ -93,7 +93,7 @@ const handleRating = function () {
 };
 
 const handleSubmit = function () {
-  $('body').on('click', '.js-submit', function (event) {
+  $('body').on('submit', '.js-create-form', function (event) {
     event.preventDefault();
     const newTitle = $('.js-title-input').val();
     const newUrl = $('.js-url-input').val();
