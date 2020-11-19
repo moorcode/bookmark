@@ -1,26 +1,5 @@
 import store from './store';
 
-const generateItemElement = function (item) {
-  let bookmark = `
-      <li class="bookmark-element" data-item-id="${item.id}">
-        <form class="js-edit>
-          <label>Title:</label>
-          <input class="titleInput js-title-input" type="text" value="${item.title}">
-          <label>URL:</label>
-          <input class="urlInput js-url-input" type="text" placeholder="www.address.com" value="${item.url}">
-          <label>Description:</label>
-          <textarea class="descriptionInput js-description-input">${item.description}</textarea>
-          <label class="star-rating js-star-rating"><i class="fas fa-star"></i></label>
-        </form>  
-        <button class="delete js-delete">
-          <span class="button-label">delete</span>
-        </button>
-      </li>`;
-
-  return `
-  ${bookmark}`;
-};
-
 const render = function () {
   let items = [...store.items];
   const root = `
@@ -40,14 +19,41 @@ const render = function () {
   $('#root').html(root);
   if (items.length !== 0) {
     $('.js-bookmark-list').html(bookmarkItemsString);
-  }  
+  }
+};
+
+const generateBookmarkItemsString = function (bookmarkList) {
+  const items = bookmarkList.map((item) => generateItemElement(item));
+  return items.join('');
+};
+
+const generateItemElement = function (item) {
+  const stars = handleRating();
+  let bookmark = `
+      <li class="bookmark-element" data-item-id="${item.id}">
+        <form class="js-edit">
+          <label>Title:</label>
+          <input class="titleInput js-title-input" type="text" value="${item.title}">
+          <label>URL:</label>
+          <input class="urlInput js-url-input" type="text" placeholder="www.address.com" value="${item.url}">
+          <label>Description:</label>
+          <textarea class="descriptionInput js-description-input">${item.description}</textarea>
+          <label class="star-rating js-star-rating"><i class="fas fa-star">${stars}</i></label>
+        </form>  
+        <button class="delete js-delete">
+          <span class="button-label">delete</span>
+        </button>
+      </li>`;
+
+  return `
+  ${bookmark}`;
 };
 
 const handleCreate = function () {
   $('.js-form').on('click', '.js-create-button', function (event) {
     event.preventDefault();
     $('.js-create-button').toggleClass('cancel').html('Cancel');
-    const createForm = 
+    const createForm =
       `<form class="create-form js-create-form">
         <label for="title">Title:</label>
         <input class="titleInput" type="text" name="title" required>
@@ -77,18 +83,6 @@ const handleCancel = function () {
   });
 };
 
-const handleSubmit = function () {
-  $('.js-form').on('click', '.js-submit', function (event) {
-    event.preventDefault();
-    const newTitle = $('.titleInput').val();
-    const newUrl = $('.urlInput').val();
-    const newDescription = $('.descriptionInput').val();
-    const newRating = $('.ratingInput').val();
-    store.addItem(newTitle, newUrl, newDescription, newRating);
-    render();
-  });
-};
-
 const handleRating = function () {
   $('.js-form').on('change', '.ratingInput', function () {
     const currentRating = $('.ratingInput').val();
@@ -100,12 +94,18 @@ const handleRating = function () {
   });
 };
 
-const generateBookmarkItemsString = function (bookmarkList) {
-  const items = bookmarkList.map((item) => generateItemElement(item));
-  return items.join('');
+const handleSubmit = function () {
+  $('.js-form').on('click', '.js-submit', function (event) {
+    event.preventDefault();
+    const newTitle = $('.titleInput').val();
+    const newUrl = $('.urlInput').val();
+    const newDescription = $('.descriptionInput').val();
+    const newRating = $('.ratingInput').val();
+    handleRating(newRating);
+    store.addItem(newTitle, newUrl, newDescription, newRating);
+    render();
+  });
 };
-
-
 
 const getItemIdFromElement = function (item) {
   return $(item)
@@ -130,8 +130,8 @@ const handleDelete = function () {
 const bindEventListeners = function () {
   handleCreate();
   handleCancel();
-  handleSubmit();
   handleRating();
+  handleSubmit();
   handleDelete();
 };
 

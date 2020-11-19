@@ -4,7 +4,7 @@
 
 body {
     margin: 0;
-    padding: 20px 80px;
+    padding: 20px 7%;
     height: 100vh;
     width: 100%;
     position: relative;
@@ -126,9 +126,9 @@ input:hover, textarea:hover, select:hover {
     display: none;
 }
 
-@media only screen and (min-width: 750px) {
+@media only screen and (min-width: 900px) {
     body {
-        padding: 40px 150px;
+        padding: 40px 5%;
     }
 
     h1 {
@@ -152,14 +152,16 @@ input:hover, textarea:hover, select:hover {
 
     .create-form-div {
         order: 3;
+        box-sizing: border-box;
+        width: 30%;
     }
 
     .create-form {
-        width: 415px;
+        width: 100%;
     }
 
     .bookmark-list {
         margin: 0 0 0 20px;
-        width: 67%;
+        width: 60%;
     }
 }
