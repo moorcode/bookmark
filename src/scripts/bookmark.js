@@ -29,22 +29,19 @@ const generateBookmarkItemsString = function (bookmarkList) {
 };
 
 const generateItemElement = function (item) {
-  console.log(item.description)
-  const stars = handleRating();
+  let starRating = [];
+  for (let i = 0; i < item.rating; i++) {
+    starRating.push('<i class="fas fa-star"></i>');
+  }
+
   let bookmark = `
       <li class="bookmark-element js-bookmark-element" data-item-id="${item.id}">
-        <form class="js-edit">
-          <label>Title:</label>
-          <input class="titleInput js-title-input" type="text" value="${item.title}">
-          <label>URL:</label>
-          <input class="urlInput js-url-input" type="text" placeholder="www.address.com" value="${item.url}">
-          <label>Description:</label>
-          <textarea class="descriptionInput js-description-input">${item.description}</textarea>
-          <label class="star-rating js-star-rating"><i class="fas fa-star" value="${stars}"></i></label>
-          <button class="delete js-delete">Delete</button>
-        </form>  
+        <span class="condensed">
+          <label class="titleInput js-title-element">${item.title}</label>
+          <label class="js-star-rating">${starRating}</label> 
+        </span>
       </li>`;
-
+           
   return `
   ${bookmark}`;
 };
@@ -56,12 +53,12 @@ const handleCreate = function () {
     const createForm =
       `<form class="create-form js-create-form">
         <label for="title">Title:</label>
-        <input class="titleInput js-title-input" type="text" name="title" required>
+        <input class="titleInput js-title-input" type="text" name="title" required />
         <label for="url">URL:</label>
-        <input class="urlInput js-url-input" type="text" placeholder="www.address.com" name="url" required>
+        <input class="urlInput js-url-input" type="text" placeholder="www.address.com" name="url" required />
         <label>Description:</label>
         <textarea class="descriptionInput js-description-input"></textarea>
-        <label class="star-rating js-star-rating"><i class="fas fa-star"></i></label>
+        <label class="star-rating js-current-star-rating"><i class="fas fa-star"></i></label>
         <select class="ratingInput">
           <option class="option" >1</option>
           <option class="option">2</option>
@@ -69,8 +66,9 @@ const handleCreate = function () {
           <option class="option">4</option>
           <option class="option">5</option>
         </select>
-      </form>
-      <button class="submit js-submit">Add Bookmark</button>`;
+        <button class="submit-button js-submit">Add Bookmark</button>
+      </form>`;
+
     $('.js-create-form-div').html(createForm).slideDown();
   });
 };
@@ -90,7 +88,7 @@ const handleRating = function () {
     for (let i = 0; i < currentRating; i++) {
       starRating.push('<i class="fas fa-star"></i>');
     }
-    $('.js-star-rating').html(starRating);
+    $('.js-current-star-rating').html(starRating);
   });
 };
 
@@ -100,7 +98,7 @@ const handleSubmit = function () {
     const newTitle = $('.js-title-input').val();
     const newUrl = $('.js-url-input').val();
     const newDescription = $('.js-description-input').val();
-    const newRating = $('.js-star-rating').val();
+    const newRating = $('.ratingInput').val();
     store.addItem(newTitle, newUrl, newDescription, newRating);
     render();
   });
@@ -110,6 +108,22 @@ const getItemIdFromElement = function (item) {
   return $(item)
     .closest('.js-bookmark-element')
     .data('item-id');
+};
+
+const handleDetailed = function () {
+  let starRating = [];
+  for (let i = 0; i < item.rating; i++) {
+    starRating.push('<i class="fas fa-star"></i>');
+  }
+  $('body').on('click', '.condensed', function () {
+    let detailed = `
+          <input class="titleInput js-title-element" type="text" value="${item.title}">
+          <label class="js-star-rating">${starRating}</label> 
+          <input class="urlInput js-url-element" type="text" value="${item.url}">
+          <textarea class="descriptionInput js-description-input">${item.description}</textarea>
+          <button class="delete js-delete">Delete</button>`;
+    $('.js-bookmark-element').html(detailed);
+  });
 };
 
 /**
@@ -133,6 +147,7 @@ const bindEventListeners = function () {
   handleRating();
   handleSubmit();
   handleDelete();
+  handleDetailed();
 };
 
 export default {
