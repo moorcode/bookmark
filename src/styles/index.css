@@ -23,8 +23,10 @@ h1 {
     word-spacing: 10px;
 }
 
-form {
-    border: solid 1px rgba(13, 92, 183, 0.112);
+.js-form {
+   display: flex;
+   flex-flow: column;
+   align-items: center;
 }
 
 .create-button {
@@ -51,7 +53,6 @@ form {
     justify-content: space-between;
     border: dashed 1px rgba(255, 255, 255, 0.831);
     color: rgba(255, 255, 255, 0.831);
-    
     font-size: 1.5em;
     list-style: none;
 }
@@ -62,13 +63,6 @@ form {
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.form {
-    margin: 0 0 0 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 .create-form {
@@ -154,7 +148,6 @@ ul>li>.condensed>.js-star-rating {
     width: 100%;
     padding: 15px;
     display: grid;
-    grid-template-columns: ;
     border: solid 1px rgba(13, 92, 183, 0.112);
 }
 

@@ -40,7 +40,7 @@ const generateItemElement = function (item) {
         <span class="condensed">
           <label class="titleElement js-title-element">${item.title}</label>
           <label class="starRatingElement js-star-rating">${starRating.join(' ')}</label> 
-          <label class="urlElement js-url-element hidden" type="text">${item.url}</label> 
+          <label class="urlElement js-url-element hidden" type="text">Visit site: <a href="${item.url}"</a>${item.url}</label> 
           <label class="descriptionElement js-description-element hidden">${item.description}</label>
           <button class="delete-button js-delete-button hidden">Delete</button>
         </span>
@@ -117,19 +117,19 @@ const getItemIdFromElement = function (item) {
 };
 
 const handleDetailed = function () {
-  $('body').on('click', '.condensed', function () {
+  $('body').on('click', '.condensed', function (event) {
     $('.condensed').toggleClass('condensed detailed');
-    $('.hidden').toggleClass('hidden');
+    $(event.currentTarget).find('.hidden').toggleClass('hidden');
     
   });
 };
 
 const handleCondensed = function () {
-  $('body').on('click', '.detailed', function () {
-    $('.detailed').find('.js-url-element').toggleClass('hidden');
-    $('.detailed').find('.js-description-element').toggleClass('hidden');
-    $('.detailed').find('.js-delete-button').toggleClass('hidden');
-    $('.detailed').toggleClass('detailed condensed');
+  $('body').on('click', '.detailed', function (event) {
+    $(event.currentTarget).find('.js-url-element').toggleClass('hidden');
+    $(event.currentTarget).find('.js-description-element').toggleClass('hidden');
+    $(event.currentTarget).find('.js-delete-button').toggleClass('hidden');
+    $(event.currentTarget).toggleClass('detailed condensed');
   });
 };
 
