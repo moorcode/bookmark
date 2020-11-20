@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import store from './store';
 import item from './item.js';
 
@@ -38,7 +39,7 @@ const generateItemElement = function (item) {
       <li class="bookmark-element js-bookmark-element" data-item-id="${item.id}">
         <span class="condensed">
           <label class="titleInput js-title-element">${item.title}</label>
-          <label class="js-star-rating">${starRating}</label> 
+          <label class="js-star-rating">${starRating.join('')}</label> 
         </span>
       </li>`;
            
@@ -87,6 +88,7 @@ const handleRating = function () {
     let starRating = [];
     for (let i = 0; i < currentRating; i++) {
       starRating.push('<i class="fas fa-star"></i>');
+      
     }
     $('.js-current-star-rating').html(starRating);
   });
@@ -100,6 +102,7 @@ const handleSubmit = function () {
     const newDescription = $('.js-description-input').val();
     const newRating = $('.ratingInput').val();
     store.addItem(newTitle, newUrl, newDescription, newRating);
+    handleDetailed(newTitle, newUrl, newDescription, newRating);
     render();
   });
 };
@@ -110,19 +113,24 @@ const getItemIdFromElement = function (item) {
     .data('item-id');
 };
 
-const handleDetailed = function () {
+const handleDetailed = function (title, url, description, rating) {
+  
   let starRating = [];
   for (let i = 0; i < item.rating; i++) {
     starRating.push('<i class="fas fa-star"></i>');
   }
-  $('body').on('click', '.condensed', function () {
+  $('body').on('click', '.condensed', function (event) {
+    const id = getItemIdFromElement(event.currentTarget);
+    const item = store.findById(id);
     let detailed = `
-          <input class="titleInput js-title-element" type="text" value="${item.title}">
-          <label class="js-star-rating">${starRating}</label> 
-          <input class="urlInput js-url-element" type="text" value="${item.url}">
-          <textarea class="descriptionInput js-description-input">${item.description}</textarea>
-          <button class="delete js-delete">Delete</button>`;
-    $('.js-bookmark-element').html(detailed);
+        <span class="detailed">
+          <label class="titleInput js-title-element" type="text">${item.title}</label> 
+          <label class="js-star-rating">${starRating.join('')}</label> 
+          <label class="urlInput js-url-element" type="text">${item.url}</label> 
+          <label class="descriptionInput js-description-input">${item.description}</label>
+          <button class="delete js-delete">Delete</button>
+        </span>`;
+    $(this).html(detailed);
   });
 };
 
@@ -147,7 +155,6 @@ const bindEventListeners = function () {
   handleRating();
   handleSubmit();
   handleDelete();
-  handleDetailed();
 };
 
 export default {

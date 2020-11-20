@@ -132,6 +132,9 @@ input:hover, textarea:hover, select:hover {
 
 .detailed {
     height: auto;
+    width: 100%;
+    display: flex;
+    flex-flow: column;
     border: solid 1px rgba(13, 92, 183, 0.112);
 }
 
