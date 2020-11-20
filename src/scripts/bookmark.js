@@ -40,7 +40,7 @@ const generateItemElement = function (item) {
         <span class="condensed">
           <label class="titleElement js-title-element">${item.title}</label>
           <label class="starRatingElement js-star-rating">${starRating.join(' ')}</label> 
-          <label class="urlElement js-url-element hidden" type="text">Visit site: <a href="${item.url}"</a>${item.url}</label> 
+          <label class="urlElement js-url-element hidden" type="text">${item.url}</label> 
           <label class="descriptionElement js-description-element hidden">${item.description}</label>
           <button class="delete-button js-delete-button hidden">Delete</button>
         </span>
