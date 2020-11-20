@@ -38,8 +38,11 @@ const generateItemElement = function (item) {
   let bookmark = `
       <li class="bookmark-element js-bookmark-element" data-item-id="${item.id}">
         <span class="condensed">
-          <label class="titleInput js-title-element">${item.title}</label>
-          <label class="js-star-rating">${starRating.join('')}</label> 
+          <label class="titleElement js-title-element">${item.title}</label>
+          <label class="starRatingElement js-star-rating">${starRating.join(' ')}</label> 
+          <label class="urlElement js-url-element hidden" type="text">${item.url}</label> 
+          <label class="descriptionElement js-description-element hidden">${item.description}</label>
+          <button class="delete-button js-delete-button hidden">Delete</button>
         </span>
       </li>`;
            
@@ -113,24 +116,20 @@ const getItemIdFromElement = function (item) {
     .data('item-id');
 };
 
-const handleDetailed = function (title, url, description, rating) {
-  
-  let starRating = [];
-  for (let i = 0; i < item.rating; i++) {
-    starRating.push('<i class="fas fa-star"></i>');
-  }
-  $('body').on('click', '.condensed', function (event) {
-    const id = getItemIdFromElement(event.currentTarget);
-    const item = store.findById(id);
-    let detailed = `
-        <span class="detailed">
-          <label class="titleInput js-title-element" type="text">${item.title}</label> 
-          <label class="js-star-rating">${starRating.join('')}</label> 
-          <label class="urlInput js-url-element" type="text">${item.url}</label> 
-          <label class="descriptionInput js-description-input">${item.description}</label>
-          <button class="delete js-delete">Delete</button>
-        </span>`;
-    $(this).html(detailed);
+const handleDetailed = function () {
+  $('body').on('click', '.condensed', function () {
+    $('.condensed').toggleClass('condensed detailed');
+    $('.hidden').toggleClass('hidden');
+    
+  });
+};
+
+const handleCondensed = function () {
+  $('body').on('click', '.detailed', function () {
+    $('.detailed').find('.js-url-element').toggleClass('hidden');
+    $('.detailed').find('.js-description-element').toggleClass('hidden');
+    $('.detailed').find('.js-delete-button').toggleClass('hidden');
+    $('.detailed').toggleClass('detailed condensed');
   });
 };
 
@@ -140,7 +139,7 @@ const handleDetailed = function (title, url, description, rating) {
  */
 
 const handleDelete = function () {
-  $('body').on('click', '.js-delete', function (event) {
+  $('body').on('click', '.js-delete-button', function (event) {
     event.preventDefault();
     const id = getItemIdFromElement(event.currentTarget);
     store.findAndDelete(id);
@@ -155,6 +154,8 @@ const bindEventListeners = function () {
   handleRating();
   handleSubmit();
   handleDelete();
+  handleDetailed();
+  handleCondensed();
 };
 
 export default {

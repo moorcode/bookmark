@@ -46,9 +46,13 @@ form {
 .bookmark-list {
     padding: 20px;
     width: 100%;
-    border: dashed 1px rgba(255, 255, 255, 0.708);
-    font-size: 20px;
+    display: flex;
+    flex-flow: column-reverse;
+    justify-content: space-between;
+    border: dashed 1px rgba(255, 255, 255, 0.831);
     color: rgba(255, 255, 255, 0.831);
+    
+    font-size: 1.5em;
     list-style: none;
 }
 
@@ -122,20 +126,52 @@ input:hover, textarea:hover, select:hover {
     background-color: rgba(56, 140, 236, 0.448);
     cursor: pointer;
 }
+.bookmark-element {
+    margin: 20px 0;
+}
+
+.bookmark-element:hover {
+    margin: 20px 0;
+    background-color: rgba(13, 92, 183, 0.112);
+    cursor: pointer;
+}
 
 .condensed {
     height: auto;
+    padding: 15px;
     display: flex;
     justify-content: space-between;
     border: solid 1px rgba(13, 92, 183, 0.112);
 }
 
+ul>li>.condensed>.js-star-rating {
+    font-size: .8em;
+}
+
 .detailed {
-    height: auto;
+    min-height: 5em;
+    height: 100%;
     width: 100%;
-    display: flex;
-    flex-flow: column;
+    padding: 15px;
+    display: grid;
+    grid-template-columns: ;
     border: solid 1px rgba(13, 92, 183, 0.112);
+}
+
+.titleElement {
+    width: fit-content;
+}
+
+.starRatingElement {
+    width: fit-content;
+}
+
+.urlElement {
+    width: fit-content;
+}
+
+.descriptionElement {
+    width: fit-content;
 }
 
 .delete-button {
@@ -193,6 +229,6 @@ input:hover, textarea:hover, select:hover {
 
     .bookmark-list {
         margin: 0 0 0 20px;
-        width: 60%;
+        width: 67%;
     }
 }
