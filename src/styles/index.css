@@ -138,7 +138,7 @@ input:hover, textarea:hover, select:hover {
     border: solid 1px rgba(13, 92, 183, 0.112);
 }
 
-ul>li>.condensed>.js-star-rating {
+.condensed>.starRatingElement {
     font-size: .8em;
 }
 
@@ -155,27 +155,22 @@ ul>li>.condensed>.js-star-rating {
 
 .detailed>.titleElement {
     width: fit-content;
-    position: relative;
-    left: -245px;
     
 }
 
 .detailed>.starRatingElement {
+    margin: 10px 0 10px 0;
     width: fit-content;
-    position: relative;
-    top: -30px;
-    right: -205px;
-    
+    font-size: .8em;
 }
 
 .detailed>.urlElement {
     width: fit-content;
-    margin: 20px 0 0 0;
 }
 
 .detailed>.descriptionElement {
+    margin: 10px 0 10px 0;
     width: fit-content;
-    margin: 20px 0 20px 0;
 }
 
 .delete-button {
@@ -199,7 +194,7 @@ ul>li>.condensed>.js-star-rating {
 
 @media only screen and (min-width: 900px) {
     body {
-        padding: 40px 5%;
+        padding: 40px 3%;
     }
 
     h1 {
@@ -232,7 +227,7 @@ ul>li>.condensed>.js-star-rating {
     }
 
     .bookmark-list {
-        margin: 0 0 0 20px;
+        margin: 0 0 0 0;
         width: 67%;
     }
 }

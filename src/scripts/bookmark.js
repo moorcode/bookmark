@@ -1,6 +1,5 @@
 /* eslint-disable no-undef */
 import store from './store';
-import item from './item.js';
 
 const render = function () {
   let items = [...store.items];
@@ -118,7 +117,7 @@ const getItemIdFromElement = function (item) {
 
 const handleDetailed = function () {
   $('body').on('click', '.condensed', function (event) {
-    $('.condensed').toggleClass('condensed detailed');
+    $(event.currentTarget).closest('.condensed').toggleClass('condensed detailed');
     $(event.currentTarget).find('.hidden').toggleClass('hidden');
     
   });
@@ -147,15 +146,20 @@ const handleDelete = function () {
   });
 };
 
+const handleFilter = function () {
+
+};
+
 
 const bindEventListeners = function () {
   handleCreate();
   handleCancel();
   handleRating();
   handleSubmit();
-  handleDelete();
   handleDetailed();
   handleCondensed();
+  handleDelete();
+  handleFilter();
 };
 
 export default {

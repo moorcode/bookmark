@@ -5,7 +5,6 @@ import bookmark from './bookmark.js';
 
 
 const main = function () {
- 
   bookmark.render();
   bookmark.bindEventListeners();
 };
