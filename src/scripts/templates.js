@@ -14,7 +14,7 @@ const generateError = function (message) {
       <section class="error-message">
         <p>${message}</p>
         <button class="close-error">Close</button>
-      </section>
+      </section> 
     `;
 };
 
