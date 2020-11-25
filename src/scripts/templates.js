@@ -13,7 +13,7 @@ const generateRoot = function () {
   return `
     <section class="form js-form">
       <button class="createButton js-create-button">Create New Bookmark</button>
-      <div class="create-form-div js-create-form-div"></div>
+      <div class="create-form-div js-create-form-div errorContainer js-error-container"></div>
       <label for="filter-rating"></label>
       <select class="filterInput js-filter-rating" name="rating-filter">
         <option value='0' ${(store.storeData.filter === '0') ? 'selected' : ''}>No Filter</option>
@@ -62,15 +62,22 @@ const generateBookmarkElement = function (item) {
   for (let i = 0; i < item.rating; i++) {
     starRating.push('<i class="fas fa-star"></i>');
   }
+  const edit = '<i class="fas fa-pencil-alt"></i>';
+  const trash = '<i class="fas fa-trash"></i>';
 
   let bookmark = `
       <li class="bookmark-element js-bookmark-element" data-item-id="${item.id}">
         <span class="condensed">
           <label class="titleElement js-title-element">${item.title}</label>
           <label class="starRatingElement js-star-rating">${starRating.join(' ')}</label> 
-          <label class="urlElement js-url-element hidden" type="text">${item.url}</label> 
           <label class="descriptionElement js-description-element hidden">${item.desc}</label>
-          <button class="deleteButton js-delete-button hidden">Delete</button>
+          <label class="urlElement js-url-element hidden"><a href="#item.url}" target="_blank">${item.url}</a></label>
+          <form class="bookmarkControls js-bookmark-controls hidden"
+            <label for="js-edit-button"></label>
+            <button class="editButton js-edit-button" name="js-title-element">${edit}</button>
+            <label for="js-delete-button"></label>
+            <button class="deleteButton js-delete-button" name="js-delete-button">${trash}</button>
+          </form>
         </span>
       </li>`;
            

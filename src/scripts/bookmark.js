@@ -17,10 +17,17 @@ const render = function () {
 const renderError = function () {
   if (store.storeData.error) {
     const errorElement = templates.generateError(store.storeData.errorMessage);
-    $('.error-container').html(errorElement);
+    $('.js-error-container').html(errorElement);
   } else {
-    $('.error-container').empty();
+    $('.js-error-container').empty();
   }
+};
+
+const handleCloseError = function () {
+  $('main').on('click', '#close-error', () => {
+    store.setError(false);
+    renderError();
+  });
 };
 
 const handleCreate = function () {
@@ -82,7 +89,6 @@ const handleSubmit = function () {
   });
 };
 
-
 const getItemIdFromElement = function (item) {
   return $(item)
     .closest('.js-bookmark-element')
@@ -101,8 +107,23 @@ const handleCondensed = function () {
   $('body').on('click', '.detailed', function (event) {
     $(event.currentTarget).find('.js-url-element').toggleClass('hidden');
     $(event.currentTarget).find('.js-description-element').toggleClass('hidden');
-    $(event.currentTarget).find('.js-delete-button').toggleClass('hidden');
+    $(event.currentTarget).find('.js-bookmark-controls').toggleClass('hidden');
     $(event.currentTarget).toggleClass('detailed condensed');
+  });
+};
+
+const handleEdit = function () {
+  $('body').on('click', '.js-delete-button', function (event) {
+    event.preventDefault();
+    const id = getItemIdFromElement(event.currentTarget);
+    api.deleteBookmark(id)
+      .then(() => {
+        store.findAndDelete(id);
+        render();
+      })
+      .catch(() => {
+        renderError();
+      });
   });
 };
 
@@ -115,7 +136,7 @@ const handleDelete = function () {
         store.findAndDelete(id);
         render();
       })
-      .catch(error => {
+      .catch(() => {
         renderError();
       });
   });
@@ -129,14 +150,15 @@ const handleFilter = function () {
   });
 };
 
-
 const eventHandlers = function () {
+  handleCloseError();
   handleCreate();
   handleCancel();
   handleRate();
   handleSubmit();
   handleDetailed();
   handleCondensed();
+  handleEdit();
   handleDelete();
   handleFilter();
 };

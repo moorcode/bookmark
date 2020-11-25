@@ -61,14 +61,6 @@ h1 {
     list-style: none;
 }
 
-.empty {
-    list-style: none;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .create-form {
     margin: 0 0 0 0;
     padding: 15px 0 0 0;
@@ -127,6 +119,13 @@ input:hover, textarea:hover, select:hover {
 
 .filterInput {
     margin: 22px 0 0 0;
+    background-color: rgba(13, 92, 183, 0.379);
+    border: none;
+} 
+
+.filterInput:hover {
+    background-color: rgba(13, 92, 183, 0.557);
+    cursor: pointer;
 }
 
 .bookmark-element {
@@ -147,7 +146,12 @@ input:hover, textarea:hover, select:hover {
     border: solid 1px rgba(13, 92, 183, 0.112);
 }
 
+.condensed>.titleElement {
+    font-size: .8em;
+}
+
 .condensed>.starRatingElement {
+    color: rgba(230, 230, 55, 0.513);
     font-size: .8em;
 }
 
@@ -164,36 +168,69 @@ input:hover, textarea:hover, select:hover {
 
 .detailed>.titleElement {
     width: fit-content;
+    font-size: 1em;
+    font-weight: 400;
+    letter-spacing: 1px;
     
 }
 
 .detailed>.starRatingElement {
     margin: 10px 0 10px 0;
     width: fit-content;
-    font-size: .8em;
+    color: rgba(230, 230, 55, 0.513);
+    font-size: .5em;
+}
+
+.detailed>.descriptionElement {
+    margin: 0 0 25px 0;
+    width: fit-content;
+    color: rgba(233, 245, 248, 0.803);
+    font-size: .7em;
+    font-style: italic;
+    font-weight: 200;
 }
 
 .detailed>.urlElement {
     width: fit-content;
+    font-size: .6em;
 }
 
-.detailed>.descriptionElement {
-    margin: 10px 0 10px 0;
+.bookmarkControls {
+    width: 75%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.editButton {
+    margin: 0 0 0 0;
+    padding: 7px 7px;
+    height: 55px;
     width: fit-content;
+    border: none;
+    background-color: transparent;
+    color: white;
+    font-size: 19px;
+}
+
+.editButton:hover {
+    font-size: 24px;
+    cursor: pointer;
 }
 
 .deleteButton {
-    margin: 10px 0 20px 0;
-    padding: 7px 7px;
-    height: 35px;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    height: 55px;
     width: fit-content;
     border: none;
-    background-color: rgba(25, 113, 215, 0.872);
+    background-color: transparent;
     color: white;
+    font-size: 19px;
 }
 
 .deleteButton:hover {
-    background-color: rgba(56, 140, 236, 0.448);
+    font-size: 24px;
     cursor: pointer;
 }
 
@@ -229,9 +266,12 @@ input:hover, textarea:hover, select:hover {
     }
 
     .create-form-div {
+        width: 33%;
         box-sizing: border-box;
-        width: 100%;
+        grid-area: 2 / 1 / 3 / 2;
         font-size: 18px;
+        position: absolute;
+        top: 285px;
     }
 
     .create-form {
@@ -260,9 +300,64 @@ input:hover, textarea:hover, select:hover {
         letter-spacing: 1.3px;
     }
 
+
+    .condensed>.titleElement {
+        font-size: 20px;
+    }
+
     
     .detailed {
         font-size: 18px;
+    }
+
+    .detailed>.titleElement {
+        font-size: 20px;
+    }
+
+    .detailed>.starRatingElement {
+        margin: 10px 0 10px 0;
+    }
+
+    .detailed>.descriptionElement {
+        margin: 0 0 25px 0;
+        font-size: 15px;
+    }
+
+    .detailed>.urlElement {
+        margin: 0 0 10px 0;
+        font-size: 13px;
+    }
+
+    .editButton {
+        margin: 10px 0 20px 0;
+        padding: 7px 7px;
+        height: 55px;
+        width: fit-content;
+        border: none;
+        background-color: transparent;
+        color: white;
+        font-size: 19px;
+    }
+    
+    .editButton:hover {
+        font-size: 24px;
+        cursor: pointer;
+    }
+    
+    .deleteButton {
+        margin: 0 0 0 0;
+        padding: 0 0 0 0;
+        height: 55px;
+        width: fit-content;
+        border: none;
+        background-color: transparent;
+        color: white;
+        font-size: 19px;
+    }
+    
+    .deleteButton:hover {
+        font-size: 24px;
+        cursor: pointer;
     }
     
 }
