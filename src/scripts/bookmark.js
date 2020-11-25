@@ -122,7 +122,11 @@ const handleDelete = function () {
 };
 
 const handleFilter = function () {
-
+  $('body').on('change', '.js-filter-rating', function () {
+    let filter = $('.js-filter-rating').val();
+    store.storeData.filter = filter;
+    render();
+  });
 };
 
 

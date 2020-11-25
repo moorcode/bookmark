@@ -1,13 +1,4 @@
-const generateRoot = function () {
-  return `
-    <section class="form js-form">
-      <button class="createButton js-create-button">Create New Bookmark</button>
-      <div class="create-form-div js-create-form-div"></div>
-      <ul class="bookmark-list js-bookmark-list">
-        <li class="empty js-empty">Create a bookmark to display here</li>
-      </ul>
-    </section>`;
-};
+import store from './store';
 
 const generateError = function (message) {
   return `
@@ -18,30 +9,24 @@ const generateError = function (message) {
     `;
 };
 
-const generateBookmarkListString = function (bookmarkList) {
-  const items = bookmarkList.map((item) => generateBookmarkElement(item));
-  return items.join('');
-};
-
-const generateBookmarkElement = function (item) {
-  let starRating = [];
-  for (let i = 0; i < item.rating; i++) {
-    starRating.push('<i class="fas fa-star"></i>');
-  }
-
-  let bookmark = `
-      <li class="bookmark-element js-bookmark-element" data-item-id="${item.id}">
-        <span class="condensed">
-          <label class="titleElement js-title-element">${item.title}</label>
-          <label class="starRatingElement js-star-rating">${starRating.join(' ')}</label> 
-          <label class="urlElement js-url-element hidden" type="text">${item.url}</label> 
-          <label class="descriptionElement js-description-element hidden">${item.desc}</label>
-          <button class="deleteButton js-delete-button hidden">Delete</button>
-        </span>
-      </li>`;
-           
+const generateRoot = function () {
   return `
-  ${bookmark}`;
+    <section class="form js-form">
+      <button class="createButton js-create-button">Create New Bookmark</button>
+      <div class="create-form-div js-create-form-div"></div>
+      <label for="filter-rating"></label>
+      <select class="filterInput js-filter-rating" name="rating-filter">
+        <option value='0' ${(store.storeData.filter === '0') ? 'selected' : ''}>No Filter</option>
+        <option value='5' ${(store.storeData.filter === '5') ? 'selected' : ''}>&#8902  &#8902  &#8902  &#8902  &#8902</option>
+        <option value='4' ${(store.storeData.filter === '4') ? 'selected' : ''}>&#8902  &#8902  &#8902  &#8902</option>
+        <option value='3' ${(store.storeData.filter === '3') ? 'selected' : ''}>&#8902  &#8902  &#8902</option>
+        <option value='2' ${(store.storeData.filter === '2') ? 'selected' : ''}>&#8902  &#8902</option>
+        <option value='1' ${(store.storeData.filter === '1') ? 'selected' : ''}>&#8902</option>        
+      </select>
+      <ul class="bookmark-list js-bookmark-list">
+        <li class="empty js-empty">Create a bookmark to display here</li>
+      </ul>
+    </section>`;
 };
 
 const generateBookmarkForm = function () {
@@ -71,6 +56,35 @@ const generateStarRating = function (currentRating) {
   }
   return starRating;
 };
+
+const generateBookmarkElement = function (item) {
+  let starRating = [];
+  for (let i = 0; i < item.rating; i++) {
+    starRating.push('<i class="fas fa-star"></i>');
+  }
+
+  let bookmark = `
+      <li class="bookmark-element js-bookmark-element" data-item-id="${item.id}">
+        <span class="condensed">
+          <label class="titleElement js-title-element">${item.title}</label>
+          <label class="starRatingElement js-star-rating">${starRating.join(' ')}</label> 
+          <label class="urlElement js-url-element hidden" type="text">${item.url}</label> 
+          <label class="descriptionElement js-description-element hidden">${item.desc}</label>
+          <button class="deleteButton js-delete-button hidden">Delete</button>
+        </span>
+      </li>`;
+           
+  if (item.rating >= store.storeData.filter) {
+    return `
+  ${bookmark}`;
+  }
+};
+
+const generateBookmarkListString = function (bookmarkList) {
+  const items = bookmarkList.map((item) => generateBookmarkElement(item));
+  return items.join('');
+};
+
 export default {
   generateError,
   generateRoot,
