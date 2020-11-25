@@ -29,7 +29,7 @@ h1 {
    align-items: center;
 }
 
-.create-button {
+.createButton {
     margin-top: 40px;
     margin-bottom: 30px;
     height: 50px;
@@ -40,7 +40,7 @@ h1 {
     letter-spacing: 1px;
 }    
 
-.create-button:hover {
+.createButton:hover {
     background-color: rgba(13, 92, 183, 0.557);
     cursor: pointer;
 }
@@ -107,7 +107,7 @@ input:hover, textarea:hover, select:hover {
     
 }
 
-.submit-button {
+.submitButton {
     margin: 10px 0 20px 0;
     height: 35px;
     width: 170px;
@@ -116,7 +116,7 @@ input:hover, textarea:hover, select:hover {
     color: white;
 }
 
-.submit-button:hover {
+.submitButton:hover {
     background-color: rgba(56, 140, 236, 0.448);
     cursor: pointer;
 }
@@ -173,7 +173,7 @@ input:hover, textarea:hover, select:hover {
     width: fit-content;
 }
 
-.delete-button {
+.deleteButton {
     margin: 10px 0 20px 0;
     padding: 7px 7px;
     height: 35px;
@@ -183,7 +183,7 @@ input:hover, textarea:hover, select:hover {
     color: white;
 }
 
-.delete-button:hover {
+.deleteButton:hover {
     background-color: rgba(56, 140, 236, 0.448);
     cursor: pointer;
 }
@@ -210,7 +210,7 @@ input:hover, textarea:hover, select:hover {
         justify-content: space-between;
     }
 
-    .create-button {
+    .createButton {
         margin: 0 20px 0 0;
         width: 30%;
         height: 69.33px;
