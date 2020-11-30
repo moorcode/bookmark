@@ -82,8 +82,7 @@ const generateBookmarkElement = function (item) {
       </li>`;
            
   if (item.rating >= store.storeData.filter) {
-    return `
-  ${bookmark}`;
+    return `${bookmark}`;
   }
 };
 
@@ -92,10 +91,16 @@ const generateBookmarkListString = function (bookmarkList) {
   return items.join('');
 };
 
+const generateEditForm = function () {
+  return '
+  ';
+};
+
 export default {
   generateError,
   generateRoot,
   generateBookmarkListString,
   generateBookmarkForm,
-  generateStarRating
+  generateStarRating, 
+  generateEditForm
 };

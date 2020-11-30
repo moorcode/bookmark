@@ -113,10 +113,20 @@ const handleCondensed = function () {
 };
 
 const handleEdit = function () {
-  $('body').on('click', '.js-delete-button', function (event) {
+  $('body').on('click', '.js-edit-button', function (event) {
     event.preventDefault();
     const id = getItemIdFromElement(event.currentTarget);
-    api.deleteBookmark(id)
+    const newTitle = $('.js-title-input').val();
+    const newUrl = $('.js-url-input').val();
+    const newDescription = $('.js-description-input').val();
+    const newRating = $('.js-rating-input').val();    
+    let updateData = {
+      title: newTitle,
+      url: newUrl,
+      desc: newDescription,
+      rating: newRating
+    };
+    api.updateBookmark(id, updateData)
       .then(() => {
         store.findAndDelete(id);
         render();
