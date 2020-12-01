@@ -11,7 +11,10 @@ const setError = function (value) {
 };
 
 const createBookmark = function (formData) {
-  const bookmark = {};
+  const bookmark = {
+    isDetailed: false,
+    inEditMode: false
+  };
   storeData.bookmarkList.push(Object.assign(formData, bookmark));
 };
 
