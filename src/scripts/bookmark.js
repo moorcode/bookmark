@@ -8,10 +8,12 @@ const render = function () {
   let bookmarkList = [...store.storeData.bookmarkList];
   const root = templates.generateRoot();
   const bookmarkListString = templates.generateBookmarkListString(bookmarkList);
-  $('#root').html(root);
-  if (bookmarkList.length !== 0) {
+  if (!store.storeData.adding) {
+    $('#root').html(root);
+  } else {
     $('.js-bookmark-list').html(bookmarkListString);
-  }
+  }   
+
 };
 
 const renderError = function () {
@@ -21,6 +23,24 @@ const renderError = function () {
   } else {
     $('.js-error-container').empty();
   }
+};
+
+const renderForm = function () {
+  const bookmarkForm = templates.generateBookmarkForm();
+  $('.js-create-button').html('Cancel');
+  $('.js-create-form-div').html(bookmarkForm).slideDown();
+};
+
+const renderRating = function () {
+  const currentRating = $('.ratingInput').val();
+  let starRating = templates.generateStarRating(currentRating);
+  $('.js-current-star-rating').html(starRating);
+};
+
+const renderCancelForm = function () {
+  $('.cancel').toggleClass('cancel');
+  $(this).html('Create New Bookmark');
+  $('.js-create-form-div').slideUp();
 };
 
 const handleCloseError = function () {
@@ -33,25 +53,20 @@ const handleCloseError = function () {
 const handleCreate = function () {
   $('body').on('click', '.js-create-button', function (event) {
     event.preventDefault();
-    $('.js-create-button').toggleClass('cancel').html('Cancel');
-    const bookmarkForm = templates.generateBookmarkForm();
-    $('.js-create-form-div').html(bookmarkForm).slideDown();
+    $('.js-create-button').toggleClass('cancel');
+    renderForm();
   });
 };
 
 const handleCancel = function () {
   $('body').on('click', '.cancel', function () {
-    $('.cancel').toggleClass('cancel');
-    $(this).html('Create New Bookmark');
-    $('.js-create-form-div').slideUp();
+    renderCancelForm();
   });
 };
 
 const handleRate = function () {
   $('body').on('change', '.ratingInput', function () {
-    const currentRating = $('.ratingInput').val();
-    let starRating = templates.generateStarRating(currentRating);
-    $('.js-current-star-rating').html(starRating);
+    renderRating();
   });
 };
 
@@ -113,12 +128,22 @@ const handleCondensed = function () {
 };
 
 const handleEdit = function () {
-  $('body').on('click', '.js-delete-button', function (event) {
+  $('body').on('click', '.js-edit-button', function (event) {
     event.preventDefault();
     const id = getItemIdFromElement(event.currentTarget);
-    api.deleteBookmark(id)
+    const newTitle = $('.js-title-input').val();
+    const newUrl = $('.js-url-input').val();
+    const newDescription = $('.js-description-input').val();
+    const newRating = $('.js-rating-input').val();    
+    let updateData = {
+      title: newTitle,
+      url: newUrl,
+      desc: newDescription,
+      rating: newRating
+    };
+    api.updateBookmark(id, updateData)
       .then(() => {
-        store.findAndDelete(id);
+        store.findAndUpdate(id);
         render();
       })
       .catch(() => {
@@ -165,5 +190,8 @@ const eventHandlers = function () {
 
 export default {
   render,
+  renderForm,
+  renderCancelForm,
+  renderRating,
   eventHandlers
 };

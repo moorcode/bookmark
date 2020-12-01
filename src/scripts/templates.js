@@ -71,7 +71,7 @@ const generateBookmarkElement = function (item) {
           <label class="titleElement js-title-element">${item.title}</label>
           <label class="starRatingElement js-star-rating">${starRating.join(' ')}</label> 
           <label class="descriptionElement js-description-element hidden">${item.desc}</label>
-          <label class="urlElement js-url-element hidden"><a href="#item.url}" target="_blank">${item.url}</a></label>
+          <label class="urlElement js-url-element hidden"><a href="${item.url}" target="_blank">Click to visit</a></label>
           <form class="bookmarkControls js-bookmark-controls hidden"
             <label for="js-edit-button"></label>
             <button class="editButton js-edit-button" name="js-title-element">${edit}</button>
@@ -82,8 +82,7 @@ const generateBookmarkElement = function (item) {
       </li>`;
            
   if (item.rating >= store.storeData.filter) {
-    return `
-  ${bookmark}`;
+    return `${bookmark}`;
   }
 };
 
@@ -92,10 +91,36 @@ const generateBookmarkListString = function (bookmarkList) {
   return items.join('');
 };
 
+const generateEditForm = function (item) {
+  let starRating = [];
+  for (let i = 0; i < item.rating; i++) {
+    starRating.push('<i class="fas fa-star"></i>');
+  }
+  const edit = '<i class="fas fa-pencil-alt"></i>';
+  const trash = '<i class="fas fa-trash"></i>';
+  
+  return `
+  <li class="bookmark-element js-bookmark-element" data-item-id="${item.id}">
+    <span class="condensed">
+      <label class="titleElement js-title-element">${item.title}</label>
+      <label class="starRatingElement js-star-rating">${starRating.join(' ')}</label> 
+      <label class="descriptionElement js-description-element hidden">${item.desc}</label>
+      <label class="urlElement js-url-element hidden"><a href="#item.url}" target="_blank">${item.url}</a></label>
+      <form class="bookmarkControls js-bookmark-controls hidden"
+        <label for="js-edit-button"></label>
+        <button class="editButton js-edit-button" name="js-title-element">${edit}</button>
+        <label for="js-delete-button"></label>
+        <button class="deleteButton js-delete-button" name="js-delete-button">${trash}</button>
+      </form>
+    </span>
+  </li>`;
+};
+
 export default {
   generateError,
   generateRoot,
   generateBookmarkListString,
   generateBookmarkForm,
-  generateStarRating
+  generateStarRating, 
+  generateEditForm
 };
