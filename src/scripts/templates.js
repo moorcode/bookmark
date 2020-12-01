@@ -15,7 +15,7 @@ const generateRoot = function () {
       <button class="createButton js-create-button">Create New Bookmark</button>
       <div class="create-form-div js-create-form-div errorContainer js-error-container"></div>
       <label for="filter-rating"></label>
-      <select class="filterInput js-filter-rating" name="rating-filter">
+      <select class="filterInput js-filter-rating" id="filter-rating">
         <option value='0' ${(store.storeData.filter === '0') ? 'selected' : ''}>No Filter</option>
         <option value='5' ${(store.storeData.filter === '5') ? 'selected' : ''}>&#8902  &#8902  &#8902  &#8902  &#8902</option>
         <option value='4' ${(store.storeData.filter === '4') ? 'selected' : ''}>&#8902  &#8902  &#8902  &#8902</option>
@@ -32,11 +32,11 @@ const generateRoot = function () {
 const generateBookmarkForm = function () {
   return `<form class="create-form js-create-form">
   <label for="title">Title:</label>
-  <input class="titleInput js-title-input" type="text" name="title" required />
+  <input class="titleInput js-title-input" type="text" id="title" required />
   <label for="url">URL:</label>
-  <input class="urlInput js-url-input" type="url" placeholder="http://www.example.com" name="url" required />
+  <input class="urlInput js-url-input" type="url" placeholder="http://www.example.com" id="url" required />
   <label for="description">Description:</label>
-  <textarea class="descriptionInput js-description-input" name="description"></textarea>
+  <textarea class="descriptionInput js-description-input" id="description"></textarea>
   <label class="starRating js-current-star-rating"><i class="fas fa-star"></i></label>
   <select class="ratingInput js-rating-input">
     <option class="option" >1</option>
