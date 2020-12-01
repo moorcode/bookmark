@@ -128,7 +128,7 @@ const handleEdit = function () {
     };
     api.updateBookmark(id, updateData)
       .then(() => {
-        store.findAndDelete(id);
+        store.findAndUpdate(id);
         render();
       })
       .catch(() => {
