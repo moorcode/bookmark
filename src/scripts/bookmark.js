@@ -8,11 +8,10 @@ const render = function () {
   let bookmarkList = [...store.storeData.bookmarkList];
   const root = templates.generateRoot();
   const bookmarkListString = templates.generateBookmarkListString(bookmarkList);
-  if (!store.storeData.adding) {
-    $('#root').html(root);
-  } else {
+  $('#root').html(root);
+  if (bookmarkList.length > 0) {
     $('.js-bookmark-list').html(bookmarkListString);
-  }   
+  } 
 
 };
 
@@ -27,6 +26,7 @@ const renderError = function () {
 
 const renderForm = function () {
   const bookmarkForm = templates.generateBookmarkForm();
+  $('.js-create-button').toggleClass('cancel');
   $('.js-create-button').html('Cancel');
   $('.js-create-form-div').html(bookmarkForm).slideDown();
 };
@@ -39,8 +39,20 @@ const renderRating = function () {
 
 const renderCancelForm = function () {
   $('.cancel').toggleClass('cancel');
-  $(this).html('Create New Bookmark');
+  $('.js-create-button').html('Create New Bookmark');
   $('.js-create-form-div').slideUp();
+};
+
+const renderDetailed = function (event) {
+  $(event.currentTarget).closest('.condensed').toggleClass('condensed detailed');
+  $(event.currentTarget).find('.hidden').toggleClass('hidden');
+};
+
+const renderCondensed = function (event) {
+  $(event.currentTarget).find('.js-url-element').toggleClass('hidden');
+  $(event.currentTarget).find('.js-description-element').toggleClass('hidden');
+  $(event.currentTarget).find('.js-bookmark-controls').toggleClass('hidden');
+  $(event.currentTarget).toggleClass('detailed condensed');
 };
 
 const handleCloseError = function () {
@@ -51,9 +63,7 @@ const handleCloseError = function () {
 };
 
 const handleCreate = function () {
-  $('body').on('click', '.js-create-button', function (event) {
-    event.preventDefault();
-    $('.js-create-button').toggleClass('cancel');
+  $('body').on('click', '.js-create-button', function () {
     renderForm();
   });
 };
@@ -112,18 +122,13 @@ const getItemIdFromElement = function (item) {
 
 const handleDetailed = function () {
   $('body').on('click', '.condensed', function (event) {
-    $(event.currentTarget).closest('.condensed').toggleClass('condensed detailed');
-    $(event.currentTarget).find('.hidden').toggleClass('hidden');
-    
+    renderDetailed(event);    
   });
 };
 
 const handleCondensed = function () {
   $('body').on('click', '.detailed', function (event) {
-    $(event.currentTarget).find('.js-url-element').toggleClass('hidden');
-    $(event.currentTarget).find('.js-description-element').toggleClass('hidden');
-    $(event.currentTarget).find('.js-bookmark-controls').toggleClass('hidden');
-    $(event.currentTarget).toggleClass('detailed condensed');
+    renderCondensed(event);
   });
 };
 
@@ -193,5 +198,7 @@ export default {
   renderForm,
   renderCancelForm,
   renderRating,
+  renderDetailed,
+  renderCondensed,
   eventHandlers
 };

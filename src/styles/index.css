@@ -83,6 +83,7 @@ input {
     width: 66%;
     border: solid 1px rgba(13, 92, 183, 0.456);
     background-color:rgba(55, 83, 138, 0.552);
+    color: white;
 }
 
 textarea {
@@ -91,6 +92,7 @@ textarea {
     width: 70%;
     border: solid 1px rgba(13, 92, 183, 0.112);
     background-color: rgba(55, 83, 138, 0.552);
+    color: white;
 }
 
 select, option  {
@@ -104,7 +106,6 @@ select, option  {
 
 input:hover, textarea:hover, select:hover {
     background-color: rgba(84, 101, 121, 0.348);
-    
 }
 
 .submitButton {
@@ -183,7 +184,7 @@ input:hover, textarea:hover, select:hover {
     margin: 10px 0 10px 0;
     width: fit-content;
     color: rgba(230, 230, 55, 0.513);
-    font-size: .5em;
+    font-size: .6em;
 }
 
 .detailed>.descriptionElement {
@@ -200,26 +201,18 @@ input:hover, textarea:hover, select:hover {
     font-size: .6em;
 }
 
-.detailed>.urlElement {
-    width: fit-content;
-    font-size: .6em;
-}
-
-.detailed>.urlElement a{
-    width: fit-content;
-    font-size: .6em;
-}
-
 .bookmarkControls {
-    width: 75%;
+    margin: 0 0 0 0;
+    padding: 0;
+    width: 50%;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
 }
 
 .editButton {
     margin: 0 0 0 0;
-    padding: 7px 7px;
+    padding: 0;
     height: 55px;
     width: fit-content;
     border: none;
@@ -311,6 +304,8 @@ input:hover, textarea:hover, select:hover {
     }
 
     .condensed {
+        display: flex;
+        justify-content: space-between;
         font-size: 18px;
         letter-spacing: 1.3px;
     }
@@ -344,14 +339,15 @@ input:hover, textarea:hover, select:hover {
     }
 
     .editButton {
-        margin: 10px 0 20px 0;
-        padding: 7px 7px;
+        margin: 0;
+        padding: 0;
         height: 55px;
         width: fit-content;
         border: none;
         background-color: transparent;
         color: white;
         font-size: 19px;
+        justify-self: left;
     }
     
     .editButton:hover {

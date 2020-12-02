@@ -14,7 +14,6 @@ const generateRoot = function () {
     <section class="form js-form">
       <button class="createButton js-create-button">Create New Bookmark</button>
       <div class="create-form-div js-create-form-div errorContainer js-error-container"></div>
-      <label for="filter-rating"></label>
       <select class="filterInput js-filter-rating" id="filter-rating">
         <option value='0' ${(store.storeData.filter === '0') ? 'selected' : ''}>No Filter</option>
         <option value='5' ${(store.storeData.filter === '5') ? 'selected' : ''}>&#8902  &#8902  &#8902  &#8902  &#8902</option>
@@ -68,16 +67,14 @@ const generateBookmarkElement = function (item) {
   let bookmark = `
       <li class="bookmark-element js-bookmark-element" data-item-id="${item.id}">
         <span class="condensed">
-          <label class="titleElement js-title-element">${item.title}</label>
-          <label class="starRatingElement js-star-rating">${starRating.join(' ')}</label> 
-          <label class="descriptionElement js-description-element hidden">${item.desc}</label>
-          <label class="urlElement js-url-element hidden"><a href="${item.url}" target="_blank">Click to visit</a></label>
-          <form class="bookmarkControls js-bookmark-controls hidden"
-            <label for="js-edit-button"></label>
-            <button class="editButton js-edit-button" name="js-title-element">${edit}</button>
-            <label for="js-delete-button"></label>
-            <button class="deleteButton js-delete-button" name="js-delete-button">${trash}</button>
-          </form>
+          <label class="titleElement js-title-element" aria-label="titleElement">${item.title}</label>
+          <label class="starRatingElement js-star-rating" aria-label="starRatingElement">${starRating.join(' ')}</label> 
+          <label class="descriptionElement js-description-element hidden" aria-label="descriptionElement">${item.desc}</label>
+          <label class="urlElement js-url-element hidden" aria-label="urlElement"><a href="${item.url}" target="_blank">Click to visit</a></label>
+          <span class="bookmarkControls js-bookmark-controls hidden">
+            <button class="editButton js-edit-button">${edit}</button>
+            <button class="deleteButton js-delete-button">${trash}</button>
+          </span>
         </span>
       </li>`;
            
