@@ -2,7 +2,6 @@ const storeData = {
   bookmarkList: [],
   adding: false,
   error: null,
-  errorMessage: '',
   filter: 0
 };
 

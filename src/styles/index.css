@@ -43,12 +43,19 @@ h1 {
 }    
 
 .createButton:hover {
-    background-color: rgba(13, 92, 183, 0.171);
+    background-color: rgba(56, 140, 236, 0.246);
     cursor: pointer;
 }
 
 .filterInput {
     min-width: fit-content;
+    background-color: rgba(13, 92, 183, 0.463);
+    color: white;
+}
+
+.filterInput:hover {
+    background-color: rgba(56, 140, 236, 0.246);
+    cursor: pointer;
 }
 
 .bookmark-list {
@@ -72,7 +79,10 @@ h1 {
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    background-color:  rgba(6, 7, 55, 0.545);
+    border-right: solid 3px rgba(13, 92, 183, 0.112);
+    border-left: solid 3px rgba(13, 92, 183, 0.112);
+    border-bottom: solid 3px rgba(13, 92, 183, 0.112);
+    background-color:  rgba(13, 92, 183, 0.112);
     opacity: 0.5;
     color: rgba(255, 255, 255, 0.831);
 }
@@ -82,7 +92,7 @@ input {
     height: 25px;
     width: 66%;
     border: solid 1px rgba(13, 92, 183, 0.456);
-    background-color:rgba(55, 83, 138, 0.552);
+    background:  rgb(255, 255, 255);
     color: white;
 }
 
@@ -91,7 +101,7 @@ textarea {
     height: 52px;
     width: 70%;
     border: solid 1px rgba(13, 92, 183, 0.112);
-    background-color: rgba(55, 83, 138, 0.552);
+    background:  rgb(255, 255, 255);
     color: white;
 }
 
@@ -101,11 +111,20 @@ select, option  {
     height: 35px;
     width: 50px;
     border: solid 1px rgba(13, 92, 183, 0.112);
-    color: rgba(255, 255, 255, 0.831);
+    color: white;
 }
 
 input:hover, textarea:hover, select:hover {
-    background-color: rgba(84, 101, 121, 0.348);
+    background:  rgba(217, 237, 255, 0.892);
+}
+
+.ratingInput {
+    background-color: rgba(13, 92, 183, 0.96);
+}
+
+.ratingInput:hover {
+    background-color: rgba(56, 140, 236, 0.448);
+    cursor: pointer;
 }
 
 .submitButton {
@@ -113,7 +132,7 @@ input:hover, textarea:hover, select:hover {
     height: 35px;
     width: 170px;
     border: none;
-    background-color: rgb(64, 92, 148);
+    background-color: rgba(13, 92, 183, 0.96);
     color: white;
 }
 
@@ -124,23 +143,17 @@ input:hover, textarea:hover, select:hover {
 
 .filterInput {
     margin: 22px 0 0 0;
-    background-color: rgba(13, 92, 183, 0.463);
     border: none;
-    color: rgba(255, 255, 255, 0.586);
 } 
-
-.filterInput:hover {
-    background-color: rgba(13, 92, 183, 0.557);
-    cursor: pointer;
-}
 
 .bookmark-element {
     margin: 20px 0;
+    background-color: rgba(13, 92, 183, 0.112);;
 }
 
 .bookmark-element:hover {
     margin: 20px 0;
-    background-color: rgba(13, 92, 183, 0.112);
+    background-color: rgba(13, 92, 183, 0.259);
     cursor: pointer;
 }
 
@@ -174,7 +187,7 @@ input:hover, textarea:hover, select:hover {
 
 .detailed>.titleElement {
     width: fit-content;
-    font-size: 1em;
+    font-size: 1.2em;
     font-weight: 400;
     letter-spacing: 1px;
     
@@ -184,21 +197,21 @@ input:hover, textarea:hover, select:hover {
     margin: 10px 0 10px 0;
     width: fit-content;
     color: rgba(230, 230, 55, 0.513);
-    font-size: .6em;
+    font-size: .8em;
 }
 
 .detailed>.descriptionElement {
     margin: 0 0 25px 0;
     width: fit-content;
     color: rgba(233, 245, 248, 0.803);
-    font-size: .7em;
+    font-size: .8em;
     font-style: italic;
     font-weight: 200;
 }
 
 .detailed>.urlElement {
     width: fit-content;
-    font-size: .6em;
+    font-size: .7em;
 }
 
 .bookmarkControls {
@@ -246,6 +259,16 @@ input:hover, textarea:hover, select:hover {
     display: none;
 }
 
+a {
+    text-decoration: none;
+    color: lightblue;
+}
+
+a:hover {
+    text-decoration: none;
+    color: rgba(231, 231, 36, 0.681);
+}
+
 @media only screen and (min-width: 900px) {
     body {
         padding: 40px 3%;
@@ -280,6 +303,9 @@ input:hover, textarea:hover, select:hover {
         font-size: 18px;
         position: absolute;
         top: 285px;
+        border-right: solid 3px rgba(13, 92, 183, 0.112);
+        border-left: solid 3px rgba(13, 92, 183, 0.112);
+        border-bottom: solid 3px rgba(13, 92, 183, 0.112);
     }
 
     .create-form {
@@ -306,36 +332,38 @@ input:hover, textarea:hover, select:hover {
     .condensed {
         display: flex;
         justify-content: space-between;
-        font-size: 18px;
+        font-size: 20px;
         letter-spacing: 1.3px;
     }
 
 
     .condensed>.titleElement {
-        font-size: 20px;
+        font-size: 23px;
     }
 
     
     .detailed {
-        font-size: 18px;
+        font-size: 24px;
     }
 
     .detailed>.titleElement {
-        font-size: 20px;
+        font-size: 28px;
     }
 
     .detailed>.starRatingElement {
         margin: 10px 0 10px 0;
+        font-size: .8em;
     }
 
     .detailed>.descriptionElement {
         margin: 0 0 25px 0;
-        font-size: 15px;
+        font-size: .9em;
     }
 
     .detailed>.urlElement {
         margin: 0 0 10px 0;
-        font-size: 13px;
+        font-size: .7em;
+        text-decoration: none;
     }
 
     .editButton {

@@ -4,11 +4,10 @@ import api from './api';
 import templates from './templates';
 
 const render = function () {
-  renderError();
   let bookmarkList = [...store.storeData.bookmarkList];
   const root = templates.generateRoot();
   const bookmarkListString = templates.generateBookmarkListString(bookmarkList);
-  $('#root').html(root);
+  $('main').html(root);
   if (bookmarkList.length > 0) {
     $('.js-bookmark-list').html(bookmarkListString);
   } 
@@ -16,12 +15,7 @@ const render = function () {
 };
 
 const renderError = function () {
-  if (store.storeData.error) {
-    const errorElement = templates.generateError(store.storeData.errorMessage);
-    $('.js-error-container').html(errorElement);
-  } else {
-    $('.js-error-container').empty();
-  }
+  alert('Something went wrong. Please check your connection and try again.');
 };
 
 const renderForm = function () {

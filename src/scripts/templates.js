@@ -1,19 +1,10 @@
 import store from './store';
 
-const generateError = function (message) {
-  return `
-      <section class="error-message">
-        <p>${message}</p>
-        <button class="close-error">Close</button>
-      </section> 
-    `;
-};
-
 const generateRoot = function () {
   return `
     <section class="form js-form">
       <button class="createButton js-create-button">Create New Bookmark</button>
-      <div class="create-form-div js-create-form-div errorContainer js-error-container"></div>
+      <div class="create-form-div js-create-form-div"></div>
       <select class="filterInput js-filter-rating" id="filter-rating">
         <option value='0' ${(store.storeData.filter === '0') ? 'selected' : ''}>No Filter</option>
         <option value='5' ${(store.storeData.filter === '5') ? 'selected' : ''}>&#8902  &#8902  &#8902  &#8902  &#8902</option>
@@ -36,7 +27,8 @@ const generateBookmarkForm = function () {
   <input class="urlInput js-url-input" type="url" placeholder="http://www.example.com" id="url" required />
   <label for="description">Description:</label>
   <textarea class="descriptionInput js-description-input" id="description"></textarea>
-  <label class="starRating js-current-star-rating"><i class="fas fa-star"></i></label>
+  <label class="starRating js-current-star-rating hidden">Rating</label>
+  <span class="starRating js-current-star-rating"><i class="fas fa-star"></i></span>
   <select class="ratingInput js-rating-input">
     <option class="option" >1</option>
     <option class="option">2</option>
@@ -114,7 +106,6 @@ const generateEditForm = function (item) {
 };
 
 export default {
-  generateError,
   generateRoot,
   generateBookmarkListString,
   generateBookmarkForm,
