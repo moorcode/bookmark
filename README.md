@@ -1,6 +1,6 @@
 moorcode.github.io/bookmark/
 
-Bookmark App enables the following experience:
+Bookmark App coded with jQuery enables the following experience:
 <br>
 User Story 1: read bookmarks on run<br>
 User Story 2: create condensed bookmark (required title/rating) to list<br>
